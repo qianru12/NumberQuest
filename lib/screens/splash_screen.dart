@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home_screen.dart'; // Import the home screen
+import 'home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -10,9 +10,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-
-    // Navigate to the home screen after a delay
-    Future.delayed(Duration(seconds: 10), () {
+    Future.delayed(Duration(seconds: 3), () {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => HomeScreen()),
@@ -25,7 +23,6 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -34,11 +31,9 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
             child: Container(
-              color: Colors.black.withOpacity(0.5), // Dark overlay
+              color: Colors.black.withOpacity(0.5),
             ),
           ),
-
-          // Logo in the center
           Center(
             child: Image.asset(
               'assets/logo.png',

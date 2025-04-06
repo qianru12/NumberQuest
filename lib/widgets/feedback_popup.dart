@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FeedbackPopup extends StatelessWidget {
-  final bool isCorrect; // Whether the answer is correct
-  final bool showFeedback; // Whether to show the feedback
+  final bool isCorrect;
+  final bool showFeedback;
 
   const FeedbackPopup({
     required this.isCorrect,
@@ -12,20 +12,20 @@ class FeedbackPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AnimatedOpacity(
-      opacity: showFeedback ? 1.0 : 0.0, // Fade in/out
-      duration: Duration(milliseconds: 300), // Transition duration
+      opacity: showFeedback ? 1.0 : 0.0, 
+      duration: Duration(milliseconds: 300), 
       child: AnimatedContainer(
-        duration: Duration(milliseconds: 300), // Transition duration
-        width: showFeedback ? 150 : 100, // Animate size
+        duration: Duration(milliseconds: 300), 
+        width: showFeedback ? 150 : 100, 
         height: showFeedback ? 150 : 100,
         decoration: BoxDecoration(
           color: isCorrect ? Colors.green : Colors.red,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
             color: isCorrect
-                ? Colors.green[800]! // Darker green for border
-                : Colors.red[900]!, // Darker red for border
-            width: 4, // Border thickness
+                ? Colors.green[800]! 
+                : Colors.red[900]!, 
+            width: 4, 
           ),
           boxShadow: [
             BoxShadow(
@@ -38,7 +38,7 @@ class FeedbackPopup extends StatelessWidget {
         child: Icon(
           isCorrect ? Icons.check : Icons.close,
           color: Colors.white,
-          size: 70, // Larger icon
+          size: 70, 
         ),
       ),
     );

@@ -1,14 +1,12 @@
-// compare_number_screen.dart
-import 'dart:async'; // For Timer
-import 'dart:math'; // For Random()
+import 'dart:async';
+import 'dart:math';
 import 'dart:math' show Random, sqrt, min, max;
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
-import '../utils/audio_manager.dart'; // Custom audio manager
-import '../widgets/feedback_popup.dart'; // Reusable feedback popup
-import '../widgets/quit_game_popup.dart'; // Reusable quit game popup
-import '../widgets/reward_popup.dart'; // Reusable result display popup
-import '../widgets/music_toggle_button.dart'; // Reusable music toggle button
+import '../utils/audio_manager.dart';
+import '../widgets/feedback_popup.dart'; 
+import '../widgets/quit_game_popup.dart'; 
+import '../widgets/reward_popup.dart'; 
+import '../widgets/music_toggle_button.dart'; 
 
 class CompareNumbersScreen extends StatefulWidget {
   @override
@@ -159,10 +157,10 @@ class _CompareNumbersScreenState extends State<CompareNumbersScreen> {
       builder: (context) {
         return RewardPopup(
           rewardStars: _rewardStars,
-          correctAnswers: _score, // Pass the correct answer count
+          correctAnswers: _score, 
           onClose: () {
             AudioManager.playSoundEffect('sound_effect/Press_button.mp3');
-            Navigator.pop(context); // Close the popup
+            Navigator.pop(context); 
             Navigator.pop(context); // Go back to the home screen
           },
           onReplay: () {

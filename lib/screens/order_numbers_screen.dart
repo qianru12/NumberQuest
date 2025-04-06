@@ -1,11 +1,11 @@
-import 'dart:async'; // For Timer
-import 'dart:math'; // For Random()
+import 'dart:async';
+import 'dart:math';
 import 'package:flutter/material.dart';
-import '../utils/audio_manager.dart'; // Custom audio manager
-import '../widgets/feedback_popup.dart'; // Reusable feedback popup
-import '../widgets/quit_game_popup.dart'; // Reusable quit game popup
-import '../widgets/reward_popup.dart'; // Reusable result display popup
-import '../widgets/music_toggle_button.dart'; // Reusable music toggle button
+import '../utils/audio_manager.dart';
+import '../widgets/feedback_popup.dart';
+import '../widgets/quit_game_popup.dart';
+import '../widgets/reward_popup.dart';
+import '../widgets/music_toggle_button.dart';
 
 class OrderNumbersScreen extends StatefulWidget {
   @override
@@ -13,20 +13,19 @@ class OrderNumbersScreen extends StatefulWidget {
 }
 
 class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
-  int _score = 0; // Track the number of correct answers
-  int _currentQuestion = 0; // Track the current question number
-  int _rewardStars = 0; // Track the number of reward stars
+  int _score = 0;
+  int _currentQuestion = 0;
+  int _rewardStars = 0;
 
-  List<int> _numbers = []; // Random numbers to order
-  List<int> _orderedNumbers = []; // For tracking draggable order
-  String _orderType = ''; // "ascending" or "descending"
-  int _numberOfItems = 3; // Start with 3 items, will increase based on progress
+  List<int> _numbers = [];
+  List<int> _orderedNumbers = [];
+  String _orderType = '';
+  int _numberOfItems = 3;
 
-  bool _showFeedback = false; // Track whether to show feedback
-  bool _isCorrectAnswer = false; // Track whether the answer is correct
-  String _selectedObject = ''; // Random object for the current question
+  bool _showFeedback = false;
+  bool _isCorrectAnswer = false;
+  String _selectedObject = '';
 
-  // List of objects to display (same as in ComposeNumberScreen)
   List<String> _objects = [
     'airplane.png',
     'bee.png',
@@ -84,8 +83,8 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
     String object = _objects[Random().nextInt(_objects.length)];
 
     setState(() {
-      _numbers = List.from(numbers); // Make a copy to keep original order
-      _orderedNumbers = List.from(numbers); // Keep as integers
+      _numbers = List.from(numbers);
+      _orderedNumbers = List.from(numbers);
       _orderType = _getRandomOrderType();
       _selectedObject = object;
     });
@@ -210,24 +209,21 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
     final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
 
-    // Calculate the safest row height based on available space and number of items
-    final double headerHeight =
-        100; // Estimated header height (app bar + padding)
-    final double questionHeight = 100; // Estimated question container height
-    final double buttonHeight = 80; // Estimated button height
+    final double headerHeight = 100;
+    final double questionHeight = 100;
+    final double buttonHeight = 80;
     final double availableHeight =
         screenHeight - headerHeight - questionHeight - buttonHeight;
 
     // Calculate safe row height with spacing between rows
     final double verticalPadding =
-        4.0 * (_numberOfItems + 1); // Account for spacing between rows
+        4.0 * (_numberOfItems + 1); 
     final double rowHeight =
         (availableHeight - verticalPadding) / _numberOfItems;
 
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
           Container(
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -236,17 +232,15 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
               ),
             ),
             child: Container(
-              color: Colors.black.withOpacity(0.5), // Dark overlay
+              color: Colors.black.withOpacity(0.5),
             ),
           ),
 
-          // Main Content
           SafeArea(
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Column(
                 children: [
-                  // Home Icon and Music Toggle Button
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -259,13 +253,9 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
                           _showQuitConfirmationPopup();
                         },
                       ),
-                      MusicToggleButton(
-                        iconSize: 30,
-                      ),
+                      MusicToggleButton(iconSize: 30),
                     ],
                   ),
-
-                  // Question text
                   Container(
                     padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                     margin: EdgeInsets.only(bottom: 12),
@@ -286,11 +276,7 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
-                  // Draggable boxes area
                   Expanded(child: _buildDraggableBoxesArea(rowHeight)),
-
-                  // Check Answer Button
                   Padding(
                     padding: const EdgeInsets.symmetric(vertical: 16.0),
                     child: ElevatedButton(
@@ -335,7 +321,6 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
 
   Widget _buildDraggableBoxesArea(double rowHeight) {
     return Theme(
-      // Wrap in Theme to override the default drag decoration
       data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
       child: ReorderableListView.builder(
         itemCount: _orderedNumbers.length,
@@ -349,14 +334,13 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
             height: rowHeight,
           );
         },
-        // Add a custom ProxyDecorator to control the appearance during drag
         proxyDecorator: (child, index, animation) {
           return AnimatedBuilder(
             animation: animation,
             builder: (BuildContext context, Widget? child) {
               return Material(
-                elevation: 0, // No elevation shadow
-                color: Colors.transparent, // Transparent background
+                elevation: 0, 
+                color: Colors.transparent,
                 child: child,
               );
             },
@@ -373,7 +357,6 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
     required Key key,
     required double height,
   }) {
-    // Calculate the size of objects based on the number
     double objectSize =
         number <= 10
             ? 25
@@ -399,29 +382,24 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
           ),
           child: Row(
             children: [
-              // Number on the left side
               Container(
-                width: 70, // Fixed width for the number area
+                width: 70,
                 alignment: Alignment.center,
                 padding: EdgeInsets.symmetric(horizontal: 10),
                 child: Text(
                   '$number',
                   style: TextStyle(
-                    fontSize: 28, // Smaller font size
+                    fontSize: 28,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
                 ),
               ),
-
-              // Vertical divider
               Container(
                 height: height * 0.8,
                 width: 2,
                 color: Colors.white.withOpacity(0.6),
               ),
-
-              // Objects area on the right side
               Expanded(
                 child: Container(
                   alignment: Alignment.centerLeft,
@@ -439,7 +417,7 @@ class _OrderNumbersScreenState extends State<OrderNumbersScreen> {
   Widget _buildNumberObjects(int number, double objectSize) {
     return Container(
       constraints: BoxConstraints(
-        maxHeight: 200, // Maximum height constraint to prevent overflow
+        maxHeight: 200,
       ),
       child: Wrap(
         spacing: 4,

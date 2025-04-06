@@ -1,4 +1,3 @@
-// home_screen.dart
 import 'setting_screen.dart';
 import 'compare_number_screen.dart';
 import 'compose_number_screen.dart';

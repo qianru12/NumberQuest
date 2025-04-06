@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/splash_screen.dart'; // Import your HomeScreen
+import 'screens/splash_screen.dart'; 
 
 void main() {
   runApp(MyApp());
@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Math for Kids', // App title
+      title: 'Number Quest', 
       theme: ThemeData(
         primarySwatch: Colors.lightBlue, 
         fontFamily: 'ComicSans',
@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: SplashScreen(), // Set HomeScreen as the initial screen
-      debugShowCheckedModeBanner: false, // Remove debug banner
+      home: SplashScreen(), 
+      debugShowCheckedModeBanner: false, 
     );
   }
 }

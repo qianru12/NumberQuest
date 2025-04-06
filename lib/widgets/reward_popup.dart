@@ -11,7 +11,7 @@ class RewardPopup extends StatefulWidget {
     required this.rewardStars,
     required this.onClose,
     required this.onReplay,
-    this.correctAnswers = 0, // Default value if not provided
+    this.correctAnswers = 0, 
   });
 
   @override
@@ -37,12 +37,10 @@ class _RewardPopupState extends State<RewardPopup> {
   
   Future<void> _playRewardSound() async {
     try {
-      // Select the appropriate sound based on star count
       final String soundPath = widget.rewardStars >= 2 
         ? 'sound_effect/Cheer.mp3'
         : 'sound_effect/Disappointed.mp3';
       
-      // Play the sound
       await _audioPlayer.play(AssetSource(soundPath));
     } catch (e) {
       print('Error playing sound: $e');
@@ -78,7 +76,6 @@ class _RewardPopupState extends State<RewardPopup> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Title centered
               Center(
                 child: Text(
                   'Game Over',

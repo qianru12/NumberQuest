@@ -1,11 +1,11 @@
-import 'dart:async'; // For Timer
-import 'dart:math'; // For Random()
+import 'dart:async'; 
+import 'dart:math'; 
 import 'package:flutter/material.dart';
-import '../utils/audio_manager.dart'; // Custom audio manager
-import '../widgets/feedback_popup.dart'; // Reusable feedback popup
-import '../widgets/quit_game_popup.dart'; // Reusable quit game popup
-import '../widgets/reward_popup.dart'; // Reusable result display popup
-import '../widgets/music_toggle_button.dart'; // Reusable music toggle button
+import '../utils/audio_manager.dart'; 
+import '../widgets/feedback_popup.dart'; 
+import '../widgets/quit_game_popup.dart'; 
+import '../widgets/reward_popup.dart'; 
+import '../widgets/music_toggle_button.dart';
 
 class ComposeNumberScreen extends StatefulWidget {
   @override
@@ -13,20 +13,20 @@ class ComposeNumberScreen extends StatefulWidget {
 }
 
 class _ComposeNumberScreenState extends State<ComposeNumberScreen> {
-  int _score = 0; // Track the number of correct answers
-  int _currentQuestion = 0; // Track the current question number
-  int _rewardStars = 0; // Track the number of reward stars
+  int _score = 0; 
+  int _currentQuestion = 0; 
+  int _rewardStars = 0; 
 
-  int _targetNumber = 0; // The target number to compose
-  List<int> _numberChoices = []; // Available number choices
+  int _targetNumber = 0; 
+  List<int> _numberChoices = []; 
   List<int?> _selectedNumbers = [
     null,
     null,
   ]; // Numbers selected by the user (initially empty)
 
-  bool _showFeedback = false; // Track whether to show feedback
-  bool _isCorrectAnswer = false; // Track whether the answer is correct
-  String _selectedObject = ''; // Random object for the current question
+  bool _showFeedback = false; 
+  bool _isCorrectAnswer = false; 
+  String _selectedObject = ''; 
 
   final int _fixedNumberOfChoices =
       10; // Fixed number of choices for all questions
@@ -70,8 +70,7 @@ class _ComposeNumberScreenState extends State<ComposeNumberScreen> {
     });
 
     // Generate a random target number between 2 and 20
-    // Reducing the upper limit to make the game more appropriate for children
-    int targetNumber = Random().nextInt(19) + 2; // 2 to 20
+    int targetNumber = Random().nextInt(19) + 2; 
 
     // Generate number choices that include valid answers
     List<int> choices = [];
@@ -114,11 +113,9 @@ class _ComposeNumberScreenState extends State<ComposeNumberScreen> {
       choices.add(secondNumber);
     }
 
-    // Add more random numbers to have exactly _fixedNumberOfChoices
     while (choices.length < _fixedNumberOfChoices) {
       // Generate random numbers between 1 and 20
-      // Keeping numbers smaller makes the game more appropriate for children
-      int num = Random().nextInt(20) + 1; // 1 to 20
+      int num = Random().nextInt(20) + 1; 
       if (!choices.contains(num) && num != targetNumber) {
         choices.add(num);
       }
@@ -160,8 +157,6 @@ class _ComposeNumberScreenState extends State<ComposeNumberScreen> {
       // Add back numbers to keep
       choices.addAll(numbersToKeep);
     }
-
-    // Shuffle the choices
     choices.shuffle();
 
     // Select a random object for the current question
@@ -188,7 +183,6 @@ class _ComposeNumberScreenState extends State<ComposeNumberScreen> {
       if (finalCheck) break;
     }
 
-    // If somehow we still don't have a valid pair (extremely unlikely at this point),
     // regenerate the question
     if (!finalCheck) {
       print('No valid pair found, regenerating question');

@@ -1,7 +1,7 @@
 // setting_screen.dart
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
-import '../utils/audio_manager.dart'; // Custom audio manager
+import '../utils/audio_manager.dart';
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -9,13 +9,13 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  double _mainVolume = 1.0; // Main volume (0.0 to 1.0)
-  double _bgMusicVolume = 1.0; // Background music volume (0.0 to 1.0)
-  double _soundEffectVolume = 1.0; // Sound effect volume (0.0 to 1.0)
+  double _mainVolume = 1.0;
+  double _bgMusicVolume = 1.0;
+  double _soundEffectVolume = 1.0;
 
-  bool _isMainMuted = false; // Track if main volume is muted
-  bool _isBgMusicMuted = false; // Track if background music is muted
-  bool _isSoundEffectMuted = false; // Track if sound effects are muted
+  bool _isMainMuted = false;
+  bool _isBgMusicMuted = false;
+  bool _isSoundEffectMuted = false;
 
   @override
   void initState() {
@@ -37,7 +37,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _updateBgMusicVolume(double value) {
     setState(() {
       _bgMusicVolume = value;
-      _isBgMusicMuted = value == 0.0; // Mute if volume is 0
+      _isBgMusicMuted = value == 0.0; 
     });
     AudioManager.setBgMusicVolume(value);
   }
@@ -45,13 +45,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
   void _updateSoundEffectVolume(double value) {
     setState(() {
       _soundEffectVolume = value;
-      _isSoundEffectMuted = value == 0.0; // Mute if volume is 0
+      _isSoundEffectMuted = value == 0.0;
     });
     AudioManager.setSoundEffectVolume(value);
   }
 
   void _toggleMute(String type) {
-    // Play button sound effect
     AudioManager.playSoundEffect('sound_effect/Press_button.mp3');
     
     switch (type) {
@@ -82,20 +81,18 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      // Handle back button press
       onWillPop: () async {
         AudioManager.playSoundEffect('sound_effect/Press_button.mp3');
-        return true; // Allow back navigation
+        return true;
       },
       child: Scaffold(
         appBar: AppBar(
           title: Text('Settings'),
-          backgroundColor: Colors.black.withOpacity(0.2), // Semi-transparent black
-          elevation: 0, // Remove shadow
+          backgroundColor: Colors.black.withOpacity(0.2),
+          elevation: 0,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              // Play button sound effect
               AudioManager.playSoundEffect('sound_effect/Press_button.mp3');
               Navigator.of(context).pop();
             },
@@ -103,7 +100,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
         ),
         body: Stack(
           children: [
-            // Background Image
             Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -112,16 +108,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 ),
               ),
               child: Container(
-                color: Colors.black.withOpacity(0.5), // Dark overlay (50% opacity)
+                color: Colors.black.withOpacity(0.5),
               ),
             ),
-
-            // Main Content
             Padding(
               padding: const EdgeInsets.all(30.0),
               child: Column(
                 children: [
-                  // Main Volume Slider
                   _buildVolumeSlider(
                     title: 'Main Volume',
                     value: _mainVolume,
@@ -129,13 +122,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onChanged: _updateMainVolume,
                     onMute: () => _toggleMute('main'),
                     onChangeEnd: (value) {
-                      // Play sound effect when slider interaction ends
                       AudioManager.playSoundEffect('sound_effect/Press_button.mp3');
                     },
                   ),
                   SizedBox(height: 20),
-
-                  // Background Music Volume Slider
                   _buildVolumeSlider(
                     title: 'Background Music',
                     value: _bgMusicVolume,
@@ -143,13 +133,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onChanged: _updateBgMusicVolume,
                     onMute: () => _toggleMute('bgMusic'),
                     onChangeEnd: (value) {
-                      // Play sound effect when slider interaction ends
                       AudioManager.playSoundEffect('sound_effect/Press_button.mp3');
                     },
                   ),
                   SizedBox(height: 20),
-
-                  // Sound Effect Volume Slider
                   _buildVolumeSlider(
                     title: 'Sound Effects',
                     value: _soundEffectVolume,
@@ -157,15 +144,12 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     onChanged: _updateSoundEffectVolume,
                     onMute: () => _toggleMute('soundEffect'),
                     onChangeEnd: (value) {
-                      // Play sound effect when slider interaction ends
                       AudioManager.playSoundEffect('sound_effect/Press_button.mp3');
                     },
                   ),
                 ],
               ),
             ),
-
-            // Footer
             Positioned(
               bottom: 20,
               left: 0,
@@ -215,7 +199,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
-            color: Colors.white, // White text for better visibility
+            color: Colors.white, 
           ),
         ),
         Row(
@@ -223,7 +207,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             IconButton(
               icon: Icon(
                 isMuted ? Icons.volume_off : Icons.volume_down,
-                color: Colors.white, // White icon for better visibility
+                color: Colors.white,
               ),
               onPressed: onMute,
             ),
@@ -234,7 +218,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 max: 1.0,
                 onChanged: onChanged,
                 onChangeEnd: onChangeEnd,
-                activeColor: Colors.white, // White slider for better visibility
+                activeColor: Colors.white, 
                 inactiveColor: Colors.grey,
               ),
             ),

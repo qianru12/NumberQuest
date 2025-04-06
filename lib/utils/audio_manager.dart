@@ -1,4 +1,3 @@
-// audio_manager.dart
 import 'package:audioplayers/audioplayers.dart';
 
 class AudioManager {
@@ -29,7 +28,6 @@ class AudioManager {
   }
 
   static Future<void> changeScreen(String screenName) async {
-    // Only change music if we're actually changing screens or music isn't playing
     if (_currentScreen != screenName ||
         _backgroundPlayer.state != PlayerState.playing) {
       _currentScreen = screenName;
@@ -60,7 +58,6 @@ class AudioManager {
     if (_isMusicMuted) {
       stopBackgroundMusic();
     } else {
-      // Fix the nullable String issue with a more explicit null check
       String musicPath =
           _screenMusic[_currentScreen] ??
           _screenMusic['home'] ??

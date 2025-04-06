@@ -1,4 +1,3 @@
-// music_toggle_button.dart
 import 'package:flutter/material.dart';
 import '../utils/audio_manager.dart';
 
